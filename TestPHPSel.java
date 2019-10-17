@@ -15,7 +15,7 @@ public class TestPHPSel {
  
                 WebDriver driver = new ChromeDriver(chromeOptions);
  
-                driver.get("http://34.238.255.214:32768/");
+                driver.get("http://3.86.102.56:32768/");
  
                 Thread.sleep(1000);
 
