@@ -1,0 +1,63 @@
+---
+- hosts: test
+  become: yes
+  become_method: sudo
+  strategy: free
+  gather_facts: True
+  
+  tasks:
+    - name: Upgrade all packages to the latest version
+      apt:
+        name: "*"
+        state: latest
+        force_apt_get: yes
+
+    - name: Install dependencies
+      package: name=unzip
+      tags: [configuration, selenium]
+
+    - name: Install Java 1.8
+      apt: name=openjdk-8-jdk state=present
+
+    - name: create directory
+      file: "path=/home/devops/selenium state=directory recurse=yes"
+      tags: [configuration, selenium, selenium-create-directory]
+
+    - name: Download Selenium
+      get_url:
+        url: "https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar"
+        dest: "/home/devops/selenium/selenium-server-standalone-3.141.59.jar"
+      tags: [configuration, selenium, selenium-download]
+
+    - name: Add Chrome key (if configured, Debian)
+      apt_key:
+        url: "https://dl-ssl.google.com/linux/linux_signing_key.pub"
+        state: present
+  
+    - name: Add Chrome repo (if configured, Debian)
+      apt_repository:
+        repo: "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
+        state: present
+        update_cache: yes
+  
+    - name: Install Chrome (if configured, Debian)
+      apt:
+        name: google-chrome-stable
+        state: present
+ 
+    - name: Install chromedriver
+      unarchive:
+        src: "https://chromedriver.storage.googleapis.com/77.0.3865.40/chromedriver_linux64.zip"
+        dest: /usr/bin
+        mode: 0755
+        copy: no
+        
+    - name: Install TestNG
+      unarchive:
+        src: "http://www.java2s.com/Code/JarDownload/testng/testng-6.8.7.jar.zip"
+        dest: /home/devops/selenium        
+        copy: no    
+  
+    - name: Install xvfb
+      package: name=xvfb
+      tags: [configuration, selenium, selenium-xvfb]
