@@ -1,0 +1,14 @@
+
+## db-[99:101]-node.example.com
+
+[test]
+172.31.84.231
+
+
+[test:vars]
+ansible_user=devops
+ansible_ssh_pass=devops
+ansible_sudo_pass=devops
+
+
+

@@ -1,0 +1,12 @@
+- hosts: test
+  become: yes
+  tasks:
+  
+    - name: run image  
+      shell: docker run -d -P manasa12/phpapp:7
+
+    - name: Copy file   
+      copy:
+        src: /var/lib/jenkins/workspace/phpdeployandtest/TestPHPSel.java
+        dest: /home/devops
+        force: yes

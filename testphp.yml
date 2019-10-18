@@ -1,0 +1,9 @@
+- hosts: test
+  become: yes
+  tasks:
+    - name: test1 php
+      shell: javac TestPHPSel.java
+
+    - name: test2 php
+      shell: java TestPHPSel
+     
