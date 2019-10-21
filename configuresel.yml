@@ -4,15 +4,13 @@
 
   tasks:
 
-    - name: Change the working directory to somedir/ before executing the command.
-      shell: touch mkh1.txt
-         
+          
 
-    - name: Change the working directory to somedir/ before executing the command.      
+    - name: start browser with selenium.      
       shell: sudo xvfb-run -a java -Dwebdriver.chrome.driver=/usr/bin/chromedriver -jar selenium-server-standalone-3.141.59.jar
       
 
-    - name: Change the working directory to somedir/ before executing the command.
+    - name: export slenium and testNg path.
       shell: sudo export CLASSPATH=".:selenium-server-standalone-3.141.59.jar:testng-6.8.7.jar"
       
 
