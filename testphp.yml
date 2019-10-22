@@ -1,9 +1,12 @@
+---
 - hosts: test
   become: yes
   tasks:
+    
     - name: test1 php
-      shell: javac TestPHPSel.java
+      shell: java -jar TestPHPSel.jar
+      register: ps
 
-    - name: test2 php
-      shell: java TestPHPSel
+    - debug: var=ps.stdout_lines
+ 
      

@@ -2,11 +2,11 @@
   become: yes
   tasks:
   
-    - name: run image  
+    - name: run image
       shell: docker run -d -P manasa12/phpapp:7
 
     - name: Copy file   
       copy:
-        src: /var/lib/jenkins/workspace/phpdeployandtest/TestPHPSel.java
+        src: /var/lib/jenkins/workspace/phpdeployandtest/TestPHPSel.jar
         dest: /home/devops
         force: yes
